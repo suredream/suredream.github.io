@@ -201,6 +201,49 @@ pre code { background: transparent; padding: 0; color: inherit; }
   font-size: 13px;
 }
 
+.post-page {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.post-outline {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  body:has(.post-page) { max-width: 1000px; }
+
+  .post-page {
+    grid-template-columns: 200px minmax(0, 760px);
+    gap: 40px;
+  }
+
+  .post-outline {
+    display: block;
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .post-outline ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-outline li { margin: 6px 0; }
+  .post-outline .outline-depth-2 { padding-left: 14px; }
+
+  .post-outline a {
+    color: var(--muted);
+    border-bottom: 0;
+  }
+
+  .post-outline a:hover { color: var(--accent); opacity: 1; }
+}
+
 @media (max-width: 560px) {
   body { margin: 30px auto; font-size: 15px; }
   h1 { font-size: 1.4em; }

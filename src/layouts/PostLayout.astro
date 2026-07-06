@@ -1,25 +1,42 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import type { MarkdownHeading } from 'astro';
 const { title, date, lang, summary, translation, updated } = Astro.props.frontmatter;
+const { headings = [], readingMinutes } = Astro.props as { headings?: MarkdownHeading[]; readingMinutes?: number };
 const formattedDate = new Date(date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
 const formattedUpdated = updated ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) : null;
 const langLabel = lang === 'zh' ? '中文' : 'English';
 const translationLabel = lang === 'zh' ? 'English version' : '中文版本';
+const outlineHeadings = headings.filter((h) => h.depth <= 2);
 ---
 <BaseLayout title={`${title} · Still Becoming`} description={summary}>
-  <article>
-    <h1>{title}</h1>
-    <div class="post-meta">
-      {formattedDate} · {langLabel}
-      {formattedUpdated && <> · Updated {formattedUpdated}</>}
-    </div>
-    {translation && (
-      <div class="language-switch">
-        <a href={translation}>{translationLabel}</a>
-      </div>
+  <div class="post-page">
+    {outlineHeadings.length > 0 && (
+      <nav class="post-outline" aria-label="Table of contents">
+        <ul>
+          {outlineHeadings.map((h) => (
+            <li class={`outline-depth-${h.depth}`}>
+              <a href={`#${h.slug}`}>{h.text}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     )}
-    <slot />
-  </article>
+    <article>
+      <h1>{title}</h1>
+      <div class="post-meta">
+        {formattedDate} · {langLabel}
+        {readingMinutes && <> · {readingMinutes} min read</>}
+        {formattedUpdated && <> · Updated {formattedUpdated}</>}
+      </div>
+      {translation && (
+        <div class="language-switch">
+          <a href={translation}>{translationLabel}</a>
+        </div>
+      )}
+      <slot />
+    </article>
+  </div>
   <hr />
   <p><a href="/archive/">Back to Archive</a></p>
 </BaseLayout>

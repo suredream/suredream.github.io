@@ -1,20 +1,17 @@
 ---
 title: "从模式识别到问题治理：工作能力的养成游戏"
-date: 2019-05-21
+date: 2019-05-20
 lang: zh
 summary: "一个关于独立工作能力的最小模型：问题空间、scope、validation 闭环与向上管理。"
-translation: "/posts/2026-05-21-problem-governance-en/"
+translation: "/posts/2019-05-20-problem-governance-en/"
 type: essay
 draft: false
 tags:
-  - work-capability
   - problem-definition
   - management
 ---
 
 > [Jun Xiong](https://www.linkedin.com/in/junxeo/)
-- 初稿：2019-05-21
-- 重发时少量内容经 AI 润色
 
 本文有中文与英文两个版本。 Chinese version focuses on the original thinking process. English version is adapted for a broader professional audience.
 

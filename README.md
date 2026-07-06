@@ -1,6 +1,6 @@
 # Still Becoming
 
-A minimal Astro blog for publishing essays on AI, work, judgment, and knowledge assets.
+A minimal Astro [blog for publishing essays](https://suredream.github.io/) on AI, work, judgment, and knowledge assets.
 
 Target remote repository:
 

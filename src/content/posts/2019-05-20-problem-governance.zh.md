@@ -11,8 +11,6 @@ tags:
   - management
 ---
 
-> [Jun Xiong](https://www.linkedin.com/in/junxeo/)
-
 本文有中文与英文两个版本。 Chinese version focuses on the original thinking process. English version is adapted for a broader professional audience.
 
 ## 1. 问题的提出

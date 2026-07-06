@@ -1,6 +1,12 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import type { MarkdownHeading } from 'astro';
+
+const author = {
+  name: 'Jun Xiong',
+  url: 'https://www.linkedin.com/in/junxeo/',
+};
+
 const { title, date, lang, summary, translation, updated } = Astro.props.frontmatter;
 const { headings = [], readingMinutes } = Astro.props as { headings?: MarkdownHeading[]; readingMinutes?: number };
 const formattedDate = new Date(date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
@@ -25,7 +31,7 @@ const outlineHeadings = headings.filter((h) => h.depth <= 2);
     <article>
       <h1>{title}</h1>
       <div class="post-meta">
-        {formattedDate} · {langLabel}
+        <a href={author.url}>{author.name}</a> · {formattedDate} · {langLabel}
         {readingMinutes && <> · {readingMinutes} min read</>}
         {formattedUpdated && <> · Updated {formattedUpdated}</>}
       </div>

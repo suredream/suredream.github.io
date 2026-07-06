@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('posts'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const groups = posts.reduce((acc, post) => {
+  const year = post.data.date.getFullYear();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(post);
+  return acc;
+}, {});
+
+const years = Object.keys(groups).sort((a, b) => Number(b) - Number(a));
+
+function shortDate(date) {
+  return date.toLocaleDateString('en-US', { month: 'short', day: '2-digit' });
+}
+
+function langLabel(lang) {
+  return lang === 'zh' ? 'zh' : 'en';
+}
+---
+<BaseLayout title="Archive · Still Becoming" description="Archive of essays and notes.">
+  <h1>Archive</h1>
+  {years.map((year) => (
+    <section>
+      <h2 class="archive-year">{year}</h2>
+      <ul class="archive-list">
+        {groups[year].map((post) => (
+          <li>
+            <span class="archive-date">{shortDate(post.data.date)}</span>
+            <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
+            <span class="lang-pill">{langLabel(post.data.lang)}{post.data.translation ? ' · linked' : ''}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+import BaseLayout from './BaseLayout.astro';
+const { title, date, lang, summary, translation, updated } = Astro.props.frontmatter;
+const formattedDate = new Date(date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+const formattedUpdated = updated ? new Date(updated).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }) : null;
+const langLabel = lang === 'zh' ? '中文' : 'English';
+const translationLabel = lang === 'zh' ? 'English version' : '中文版本';
+---
+<BaseLayout title={`${title} · Still Becoming`} description={summary}>
+  <article>
+    <h1>{title}</h1>
+    <div class="post-meta">
+      {formattedDate} · {langLabel}
+      {formattedUpdated && <> · Updated {formattedUpdated}</>}
+    </div>
+    {translation && (
+      <div class="language-switch">
+        <a href={translation}>{translationLabel}</a>
+      </div>
+    )}
+    <slot />
+  </article>
+  <hr />
+  <p><a href="/archive/">Back to Archive</a></p>
+</BaseLayout>

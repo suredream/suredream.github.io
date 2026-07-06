@@ -6,7 +6,7 @@ This repo is a minimal Astro blog for `suredream.github.io`.
 
 You are helping maintain a quiet, text-first personal blog called **Still Becoming**.
 
-The blog publishes durable essays and notes on AI, work capability, problem definition, knowledge assets, ML systems, and judgment.
+The blog publishes durable essays and notes on intelligience and knowledge assets.
 
 Optimize for clarity, low maintenance, and long-term readability.
 

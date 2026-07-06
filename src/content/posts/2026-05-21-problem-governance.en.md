@@ -3,7 +3,7 @@ title: "From Pattern Matching to Problem Governance"
 date: 2026-07-06
 lang: en
 summary: "A minimal model of independent work capability: problem framing, scope control, validation loops, and upward management."
-translation: "/posts/2026-07-06-problem-governance.zh/"
+translation: "/posts/2026-05-21-problem-governance-zh/"
 type: essay
 draft: false
 tags:

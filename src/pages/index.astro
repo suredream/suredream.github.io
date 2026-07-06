@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const posts = (await getCollection('posts'))
@@ -7,11 +7,15 @@ const posts = (await getCollection('posts'))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 8);
 
-function formatDate(date) {
+function getPostSlug(post: CollectionEntry<'posts'>) {
+  return post.id.replace(/(en|zh)$/, '-$1');
+}
+
+function formatDate(date: Date) {
   return date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
 }
 
-function langLabel(lang) {
+function langLabel(lang: string) {
   return lang === 'zh' ? '中文' : 'English';
 }
 ---
@@ -21,7 +25,7 @@ function langLabel(lang) {
     {posts.map((post) => (
       <li class="post-item">
         <div class="post-date">{formatDate(post.data.date)} · {langLabel(post.data.lang)}</div>
-        <div class="post-title"><a href={`/posts/${post.slug}/`}>{post.data.title}</a></div>
+        <div class="post-title"><a href={`/posts/${getPostSlug(post)}/`}>{post.data.title}</a></div>
         <p class="post-summary">{post.data.summary}</p>
       </li>
     ))}

@@ -1,25 +1,29 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const posts = (await getCollection('posts'))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const groups = posts.reduce((acc, post) => {
+function getPostSlug(post: CollectionEntry<'posts'>) {
+  return post.id.replace(/(en|zh)$/, '-$1');
+}
+
+const groups = posts.reduce<Record<number, CollectionEntry<'posts'>[]>>((acc, post) => {
   const year = post.data.date.getFullYear();
   if (!acc[year]) acc[year] = [];
   acc[year].push(post);
   return acc;
 }, {});
 
-const years = Object.keys(groups).sort((a, b) => Number(b) - Number(a));
+const years = Object.keys(groups).sort((a, b) => Number(b) - Number(a)).map(Number);
 
-function shortDate(date) {
+function shortDate(date: Date) {
   return date.toLocaleDateString('en-US', { month: 'short', day: '2-digit' });
 }
 
-function langLabel(lang) {
+function langLabel(lang: string) {
   return lang === 'zh' ? 'zh' : 'en';
 }
 ---
@@ -32,7 +36,7 @@ function langLabel(lang) {
         {groups[year].map((post) => (
           <li>
             <span class="archive-date">{shortDate(post.data.date)}</span>
-            <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
+            <a href={`/posts/${getPostSlug(post)}/`}>{post.data.title}</a>
             <span class="lang-pill">{langLabel(post.data.lang)}{post.data.translation ? ' · linked' : ''}</span>
           </li>
         ))}

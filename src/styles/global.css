@@ -1,11 +1,21 @@
 :root {
-  --bg: #fbfaf7;
-  --text: #1f1f1f;
-  --muted: #77736b;
-  --line: #ded7cc;
-  --link: #111111;
-  --accent: #8a5a2b;
-  --soft: #f3efe8;
+  --bg: #ffffff;
+  --text: #2f3030;
+  --muted: #767676;
+  --line: #a9a9a9;
+  --accent: #5871a2;
+  --soft: #5871a210;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1c1c;
+    --text: #c1c1c1;
+    --muted: #848484;
+    --line: #5f5f5f;
+    --accent: #6f8fd1;
+    --soft: #6f8fd112;
+  }
 }
 
 * { box-sizing: border-box; }
@@ -18,9 +28,9 @@ body {
   padding: 0 22px;
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 17px;
-  line-height: 1.72;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
 }
 
 .site-header { margin-bottom: 38px; }
@@ -48,63 +58,66 @@ nav {
 }
 
 a {
-  color: var(--link);
+  color: var(--accent);
   text-decoration: none;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1.5px solid var(--accent);
 }
 
-a:hover { border-bottom-color: var(--accent); }
+@media (hover: hover) {
+  a:hover { opacity: 0.75; }
+}
 
 hr {
   border: 0;
-  border-top: 1px solid var(--line);
+  background: var(--line);
+  opacity: 0.25;
+  height: 2px;
   margin: 32px 0;
 }
 
 h1 {
-  font-size: 32px;
-  line-height: 1.22;
-  letter-spacing: -0.035em;
-  margin: 0 0 10px;
+  font-size: 1.6em;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5em;
 }
 
 h2 {
-  margin-top: 42px;
-  font-size: 22px;
-  line-height: 1.35;
-  letter-spacing: -0.015em;
+  margin-top: 2.5em;
+  font-size: 1.2em;
+  line-height: 1.4;
 }
 
-h3 { margin-top: 30px; }
+h3 { margin-top: 2em; }
 
-p { margin: 16px 0; }
+p { margin: 1.5em 0; }
 
-ul, ol { padding-left: 1.35rem; }
+ul, ol { padding-left: 1.4em; }
 
 blockquote {
-  margin: 24px 0;
-  padding: 10px 18px;
-  border-left: 3px solid var(--line);
-  color: #444;
-  background: var(--soft);
+  margin: 1.5em 0;
+  padding-left: 16px;
+  border-left: 1.5px solid var(--line);
+  color: var(--muted);
 }
 
 code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.92em;
+  font-size: 0.85em;
+  color: var(--accent);
   background: var(--soft);
-  padding: 0.12em 0.28em;
-  border-radius: 3px;
+  padding: 1px 6px;
+  border-radius: 2px;
 }
 
 pre {
   overflow-x: auto;
-  padding: 14px 16px;
-  background: var(--soft);
-  border: 1px solid var(--line);
+  padding: 12px 16px;
+  border: 1.5px solid var(--accent);
+  background: var(--bg);
 }
 
-pre code { background: transparent; padding: 0; }
+pre code { background: transparent; padding: 0; color: inherit; }
 
 .post-meta, .muted {
   color: var(--muted);
@@ -123,7 +136,7 @@ pre code { background: transparent; padding: 0; }
 }
 
 .post-item {
-  padding: 20px 0;
+  padding: 18px 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -131,20 +144,23 @@ pre code { background: transparent; padding: 0; }
   color: var(--muted);
   font-size: 14px;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .post-title {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 620;
   margin: 4px 0;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
 }
 
-.post-title a { border-bottom: 0; }
+.post-title a { border-bottom: 0; color: var(--text); }
+.post-title a:hover { opacity: 0.75; }
 
 .post-summary {
-  color: #444;
+  color: var(--muted);
   margin: 6px 0 0;
+  font-size: 15px;
 }
 
 .lang-pill {
@@ -153,8 +169,8 @@ pre code { background: transparent; padding: 0; }
 }
 
 .archive-year {
-  margin-top: 34px;
-  font-size: 24px;
+  margin-top: 2.2em;
+  font-size: 1.3em;
 }
 
 .archive-list {
@@ -167,7 +183,7 @@ pre code { background: transparent; padding: 0; }
   display: grid;
   grid-template-columns: 72px 1fr auto;
   gap: 14px;
-  padding: 5px 0;
+  padding: 6px 0;
   align-items: baseline;
 }
 
@@ -179,15 +195,15 @@ pre code { background: transparent; padding: 0; }
 
 .footer {
   margin-top: 58px;
-  padding-top: 20px;
+  padding-top: 16px;
   border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 @media (max-width: 560px) {
-  body { margin: 30px auto; font-size: 16px; }
-  h1 { font-size: 28px; }
+  body { margin: 30px auto; font-size: 15px; }
+  h1 { font-size: 1.4em; }
   .archive-list li { grid-template-columns: 60px 1fr; }
   .archive-list .lang-pill { grid-column: 2; }
 }
